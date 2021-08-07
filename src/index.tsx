@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {XkcdViewer} from './xkcdViewer/xkcdViewer';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <XkcdViewer />
   </React.StrictMode>,
   document.getElementById('root')
 );
