@@ -5,11 +5,11 @@ import './ComicViewer.css';
 
 export class ComicViewer extends React.Component<{data: IXkcdInfo}> {
     private formatDate(year: string, month: string, day: string) {
-        // For safety
         let numYear = parseInt(year);
         let numMonth = parseInt(month);
         let numDay = parseInt(day);
 
+        // For safety
         if(isNaN(numYear) || isNaN(numMonth) || isNaN(numDay)) {
             return '';
         }

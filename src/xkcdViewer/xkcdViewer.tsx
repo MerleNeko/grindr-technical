@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComicViewer } from '../ComicViewer/ComicViewer';
+import { Pagination } from '../Pagination/Pagination';
 import './xkcdViewer.css';
 
 export interface IXkcdInfo {
@@ -41,33 +42,7 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo}> {
     render() {
         return <div>
             <ComicViewer data={this.state.data} />
-            <nav aria-label='Page navigation'>
-            <ul className="pagination">
-                <li className="page-item">
-                    <a className="page-link" href="#" aria-label="First">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&gt;</span>
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Last">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-            </nav>
+            <Pagination currentId={this.state.data.num} maxId={this.state.data.num}/>
         </div>;
     }
 }
