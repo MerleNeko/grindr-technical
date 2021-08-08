@@ -1,7 +1,7 @@
 import React from 'react';
 import { ajax } from 'rxjs/ajax'
 import { ComicViewer } from '../ComicViewer/ComicViewer';
-import { Pagination } from '../Pagination/Pagination';
+import { IGoToFunction, Pagination } from '../Pagination/Pagination';
 import './xkcdViewer.css';
 
 export interface IXkcdInfo {
@@ -18,7 +18,7 @@ export interface IXkcdInfo {
     day: string
 }
 
-export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo}> {
+export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: number}> {
     httpCall$: any;
 
     constructor(props: any) {
@@ -38,10 +38,25 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo}> {
                 img: '',
                 title: '',
                 day: ''
-            }
+            },
+            maxId: 5
         }
 
         this.httpCall$ = ajax.getJSON<IXkcdInfo>('https://getxkcd.now.sh/api/comic?num=latest').subscribe((response) => {
+            this.setState({
+                data: response,
+                maxId: response.num
+            });
+        });
+    }
+
+    public GoToPage: IGoToFunction = (id: number) => {
+        if (id < 1 || id > this.state.maxId) {
+            //Ignore
+            return;
+        }
+        
+        this.httpCall$ = ajax.getJSON<IXkcdInfo>('https://getxkcd.now.sh/api/comic?num=' + id).subscribe((response) => {
             this.setState({
                 data: response
             });
@@ -55,7 +70,7 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo}> {
     render() {
         return <div>
             <ComicViewer data={this.state.data} />
-            <Pagination currentId={this.state.data.num} maxId={this.state.data.num}/>
+            <Pagination currentId={this.state.data.num} maxId={this.state.maxId} goTo={this.GoToPage}/>
         </div>;
     }
 }

@@ -1,15 +1,23 @@
 import React from 'react';
 import './PaginationButton.css';
 
-export class PaginationButton extends React.Component<{active: boolean, disabled: boolean, display: string, id: number}> {
+export interface IPaginationButton {
+    active: boolean, 
+    disabled: boolean, 
+    display: string, 
+    id: number
+}
+
+export interface IPaginationButtonClick { (id: number): void };
+
+export class PaginationButton extends React.Component<{buttonInfo: IPaginationButton, onButton: IPaginationButtonClick}> {
     public click = () => {
-        //Do something
-        console.log('clicked: ' + this.props.id.toString());
+        this.props.onButton(this.props.buttonInfo.id);
     }
 
     render() {
-        return <li className={'page-item' + (this.props.disabled ? ' disabled' : '') + (this.props.active ? ' active' : '')}>
-                    <button className="page-link" onClick={this.click}>{this.props.display}</button>
+        return <li className={'page-item' + (this.props.buttonInfo.disabled ? ' disabled' : '') + (this.props.buttonInfo.active ? ' active' : '')}>
+                    <button className="page-link" onClick={this.click}>{this.props.buttonInfo.display}</button>
                 </li>;
     }
 }
