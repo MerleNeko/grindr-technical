@@ -55,7 +55,7 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: num
             //Ignore
             return;
         }
-        
+
         this.httpCall$ = ajax.getJSON<IXkcdInfo>('https://getxkcd.now.sh/api/comic?num=' + id).subscribe((response) => {
             this.setState({
                 data: response
@@ -68,7 +68,7 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: num
     }
 
     render() {
-        return <div>
+        return <div className='center-text auto-block-center mx-auto'>
             <ComicViewer data={this.state.data} />
             <Pagination currentId={this.state.data.num} maxId={this.state.maxId} goTo={this.GoToPage}/>
         </div>;

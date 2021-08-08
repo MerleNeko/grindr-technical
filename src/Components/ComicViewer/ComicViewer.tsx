@@ -19,13 +19,13 @@ export class ComicViewer extends React.Component<{data: IXkcdInfo}> {
     }
 
     render() {
-        return <div>
-            <div>{this.props.data.safe_title}</div>
-            <div>{this.formatDate(this.props.data.year, this.props.data.month, this.props.data.day)}</div>
-            <img src={this.props.data.img} 
+        return <span>
+            <span className='auto-block-center mx-auto'>{this.props.data.safe_title}</span>
+            <span className='auto-block-center mx-auto'>{this.formatDate(this.props.data.year, this.props.data.month, this.props.data.day)}</span>
+            <img className='auto-block-center mx-auto' src={this.props.data.img} 
                 title={this.props.data.title} 
                 alt={this.props.data.alt}>
             </img>
-        </div>;
+        </span>;
     }
 }
