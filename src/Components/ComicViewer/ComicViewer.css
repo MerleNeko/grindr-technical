@@ -1,0 +1,19 @@
+.xkcd-title {
+    margin-top: 10px;
+    font-size: 21px;
+    font-weight: 800;
+    font-variant: small-caps;
+    font-family: Lucida,Helvetica,sans-serif;
+}
+
+.xkcd-other-text {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    font-variant: small-caps;
+    font-family: Lucida,Helvetica,sans-serif;
+}
+
+.comic-img {
+    margin-bottom: 10px;
+}

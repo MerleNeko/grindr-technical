@@ -16,8 +16,8 @@ export class PaginationButton extends React.Component<{buttonInfo: IPaginationBu
     }
 
     render() {
-        return <li className={'page-item' + (this.props.buttonInfo.disabled ? ' disabled' : '') + (this.props.buttonInfo.active ? ' active' : '')}>
-                    <button className="page-link" onClick={this.click}>{this.props.buttonInfo.display}</button>
+        return <li className={'page-item'}>
+                    <button className={'xkcd-button' + (this.props.buttonInfo.disabled ? ' disabled' : '') + (this.props.buttonInfo.active ? ' active' : '')} onClick={this.click}>{this.props.buttonInfo.display}</button>
                 </li>;
     }
 }

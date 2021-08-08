@@ -52,15 +52,15 @@ export class Pagination extends React.Component<{currentId: number, maxId: numbe
     render() {
         return <nav>
             <ul className='pagination justify-content-center'>
-                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === 1, display: '<<', id: 1} } onButton={this.buttonClick} />
-                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === 1, display: '<', id: this.props.currentId - 1} } onButton={this.buttonClick} />
+                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === 1, display: '|<', id: 1} } onButton={this.buttonClick} />
+                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === 1, display: '< Prev', id: this.props.currentId - 1} } onButton={this.buttonClick} />
                 {this.middleButton(1)}
                 {this.middleButton(2)}
                 {this.middleButton(3)}
                 {this.middleButton(4)}
                 {this.middleButton(5)}
-                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === this.props.maxId, display: '>', id: this.props.currentId + 1} } onButton={this.buttonClick} />
-                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === this.props.maxId, display: '>>', id: this.props.maxId} } onButton={this.buttonClick} />
+                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === this.props.maxId, display: 'Next >', id: this.props.currentId + 1} } onButton={this.buttonClick} />
+                <PaginationButton buttonInfo={ {active:false, disabled: this.props.currentId === this.props.maxId, display: '>|', id: this.props.maxId} } onButton={this.buttonClick} />
             </ul>
         </nav>;
     }
