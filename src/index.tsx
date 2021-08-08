@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {XkcdViewer} from './xkcdViewer/xkcdViewer';
+import {XkcdViewer} from './Components/xkcdViewer/xkcdViewer';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
