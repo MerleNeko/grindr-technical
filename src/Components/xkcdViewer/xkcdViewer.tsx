@@ -1,4 +1,5 @@
 import React from 'react';
+import { ajax } from 'rxjs/ajax'
 import { ComicViewer } from '../ComicViewer/ComicViewer';
 import { Pagination } from '../Pagination/Pagination';
 import './xkcdViewer.css';
@@ -18,25 +19,37 @@ export interface IXkcdInfo {
 }
 
 export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo}> {
+    httpCall$: any;
+
     constructor(props: any) {
         super(props);
 
-        // Sample Data
+        // State has to be initialized at the start
         this.state = { 
             data: {
-                "month": "8",
-                "num": 2499,
-                "link": "",
-                "year": "2021",
-                "news": "",
-                "safe_title": "Abandonment Function",
-                "transcript": "",
-                "alt": "Remember to only adopt domesticated drones that specifically request it. It's illegal to collect wild ones under the Migratory Drone Treaty Act.",
-                "img": "https://imgs.xkcd.com/comics/abandonment_function.png",
-                "title": "Abandonment Function",
-                "day": "6"
+                month: '',
+                num: 0,
+                link: '',
+                year: '',
+                news: '',
+                safe_title: '',
+                transcript: '',
+                alt: '',
+                img: '',
+                title: '',
+                day: ''
             }
         }
+
+        this.httpCall$ = ajax.getJSON<IXkcdInfo>('https://getxkcd.now.sh/api/comic?num=latest').subscribe((response) => {
+            this.setState({
+                data: response
+            });
+        });
+    }
+
+    componentWillUnmount() {
+        this.httpCall$.unsubscribe();
     }
 
     render() {
