@@ -68,9 +68,17 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: num
     }
 
     render() {
-        return <div className='center-text auto-block-center mx-auto'>
-            <ComicViewer data={this.state.data} />
-            <Pagination currentId={this.state.data.num} maxId={this.state.maxId} goTo={this.GoToPage}/>
+        return <div className='container'>
+            <div className='row'>
+                <div className='col-xs-auto col-sm-auto col-md-auto col-lg-1 col-xl-1'></div>
+                <div className='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 filled-column bottom-row'>
+                    <div className='center-text auto-block-center mx-auto'>
+                        <ComicViewer data={this.state.data} />
+                        <Pagination currentId={this.state.data.num} maxId={this.state.maxId} goTo={this.GoToPage}/>
+                    </div>
+                </div>
+                <div className='col-xs-auto col-sm-auto col-md-auto col-lg-1 col-xl-1'></div>
+            </div>
         </div>;
     }
 }
