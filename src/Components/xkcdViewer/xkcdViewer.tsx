@@ -1,6 +1,7 @@
 import React from 'react';
+import _ from 'underscore'
 import { catchError, first, of } from 'rxjs';
-import { ajax } from 'rxjs/ajax'
+import { ajax, AjaxError } from 'rxjs/ajax'
 import { ComicViewer } from '../ComicViewer/ComicViewer';
 import { IGoToFunction, Pagination } from '../Pagination/Pagination';
 import './xkcdViewer.css';
@@ -29,7 +30,7 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: num
         safe_title: '',
         transcript: '',
         alt: '',
-        img: '',
+        img: 'placeholder.png',
         title: '',
         day: ''
     }
@@ -61,21 +62,27 @@ export class XkcdViewer extends React.Component<{}, {data: IXkcdInfo, maxId: num
     private DoHttpCall = (id: number | string = 'latest') => {
         ajax.getJSON<IXkcdInfo>('https://getxkcd.now.sh/api/comic?num=' + id).pipe(
             first(), 
-            catchError((err, caught) => {
-                return of(this.state.data);
+            catchError((err: AjaxError, caught) => {
+                // On error, show error but keep pagination the same
+                let errorState = _.clone<IXkcdInfo>(this.state.data);
+                errorState.safe_title = err.name + ' - Please try again';
+                errorState.alt = '';
+                errorState.year = '';
+                errorState.img = 'notfound.png';
+                return of(errorState);
             })).subscribe((response) => {
-            if (id === 'latest') {
-                this.setState({
-                    data: response,
-                    maxId: response.num,
-                    loading: false
-                });
-            } else {
-                this.setState({
-                    data: response,
-                    loading: false
-                });
-            }
+                if (id === 'latest') {
+                    this.setState({
+                        data: response,
+                        maxId: response.num,
+                        loading: false
+                    });
+                } else {
+                    this.setState({
+                        data: response,
+                        loading: false
+                    });
+                }
         });
     }
 

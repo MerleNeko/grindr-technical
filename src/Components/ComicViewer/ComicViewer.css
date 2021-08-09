@@ -15,7 +15,7 @@
 }
 
 .comic-img {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .hidden {
@@ -25,7 +25,7 @@
 .floating-spinner {
     width: 100px !important;
     height: 100px !important;
-    top: 30%;
+    top: 200px;
     left: 50%;
     position: fixed;
     margin-top: -50px;
