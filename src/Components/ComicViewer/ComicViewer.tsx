@@ -3,7 +3,7 @@ import { IXkcdInfo } from '../xkcdViewer/xkcdViewer';
 import './ComicViewer.css';
 
 
-export class ComicViewer extends React.Component<{data: IXkcdInfo}> {
+export class ComicViewer extends React.Component<{data: IXkcdInfo, loading: boolean}> {
     private formatDate(year: string, month: string, day: string) {
         let numYear = parseInt(year);
         let numMonth = parseInt(month);
@@ -20,10 +20,11 @@ export class ComicViewer extends React.Component<{data: IXkcdInfo}> {
 
     render() {
         return <span>
-            <span className='auto-block-center mx-auto xkcd-title'>{this.props.data.safe_title}</span>
-            <span className='auto-block-center mx-auto xkcd-other-text'>{this.formatDate(this.props.data.year, this.props.data.month, this.props.data.day)}</span>
-            <img className='auto-block-center mx-auto comic-img' src={this.props.data.img} 
-                title={this.props.data.title} 
+            <div className={'spinner-border floating-spinner' + (this.props.loading ? '' : ' hidden')} role='status'></div>
+            <span className={'auto-block-center mx-auto xkcd-title' + (this.props.loading ? ' hidden' : '')}>{this.props.data.safe_title}</span>
+            <span className={'auto-block-center mx-auto xkcd-other-text' + (this.props.loading ? ' hidden' : '')}>{this.formatDate(this.props.data.year, this.props.data.month, this.props.data.day)}</span>
+            <img className={'auto-block-center mx-auto comic-img' + (this.props.loading ? ' hidden' : '')} src={this.props.data.img} 
+                title={this.props.data.alt}
                 alt={this.props.data.alt}>
             </img>
         </span>;
